@@ -1,0 +1,150 @@
+{
+	"id": "3ceb8c4e-785b-2800-82dc-21a7c769ce93",
+	"name": "sampleapi",
+	"description": "",
+	"order": [
+		"ce1ed47d-eca2-81f4-c6cc-5142245a7ffe",
+		"93c077fb-7e79-d0ba-5485-9d420966e447",
+		"a7366d74-2d9e-4d41-5841-e4b9810b933b",
+		"c856e4c2-7695-b1cf-b36e-65ccefe75700"
+	],
+	"folders": [],
+	"folders_order": [],
+	"timestamp": 1522877307978,
+	"owner": 0,
+	"public": false,
+	"hasRequests": true,
+	"requests": [
+		{
+			"id": "93c077fb-7e79-d0ba-5485-9d420966e447",
+			"headers": "token: a7e03f00-b33e-4756-88d9-0d6a6b62fcc5\nContent-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "token",
+					"value": "a7e03f00-b33e-4756-88d9-0d6a6b62fcc5",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:9090/projetIntegration/webapi/user/update",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "PUT",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1523227082334,
+			"name": "update user",
+			"description": "",
+			"collectionId": "3ceb8c4e-785b-2800-82dc-21a7c769ce93",
+			"responses": [],
+			"rawModeData": "{\n  \"id\": 1,\n  \"userName\": \"admin\",\n  \"password\": \"admin\",\n  \"firstname\": \"Komi Man\",\n  \"lastname\": \"sodoke\",\n  \"email\": \"komi.sodoke@colval.qc.ca\",\n  \"dob\": \"24/03/1981\",\n  \"language\": \"fr\"\n}"
+		},
+		{
+			"id": "a7366d74-2d9e-4d41-5841-e4b9810b933b",
+			"headers": "token: a7e03f00-b33e-4756-88d9-0d6a6b62fcc5\n",
+			"headerData": [
+				{
+					"key": "token",
+					"value": "a7e03f00-b33e-4756-88d9-0d6a6b62fcc5",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:9090/projetIntegration/webapi/user/1",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1523227084165,
+			"name": "user by id",
+			"description": "",
+			"collectionId": "3ceb8c4e-785b-2800-82dc-21a7c769ce93",
+			"responses": []
+		},
+		{
+			"id": "c856e4c2-7695-b1cf-b36e-65ccefe75700",
+			"headers": "token: a7e03f00-b33e-4756-88d9-0d6a6b62fcc5\n",
+			"headerData": [
+				{
+					"key": "token",
+					"value": "a7e03f00-b33e-4756-88d9-0d6a6b62fcc5",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:9090/projetIntegration/webapi/customers",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1523227080494,
+			"name": "get customers",
+			"description": "",
+			"collectionId": "3ceb8c4e-785b-2800-82dc-21a7c769ce93",
+			"responses": [],
+			"rawModeData": "{\n  \"id\": 1,\n  \"userName\": \"admin\",\n  \"password\": \"admin\",\n  \"firstname\": \"Komiassss\",\n  \"lastname\": \"sodoke\",\n  \"email\": \"sdfsdf\",\n  \"dob\": \"sdfsdflklklklk\",\n  \"language\": \"en\"\n}"
+		},
+		{
+			"id": "ce1ed47d-eca2-81f4-c6cc-5142245a7ffe",
+			"headers": "userName: admin\npassword: admin\n",
+			"headerData": [
+				{
+					"key": "userName",
+					"value": "admin",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "admin",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:9090/projetIntegration/webapi/user/authenticate",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1523227078561,
+			"name": "authenticate/get token",
+			"description": "",
+			"collectionId": "3ceb8c4e-785b-2800-82dc-21a7c769ce93",
+			"responses": [],
+			"rawModeData": "{  \r\n   \"input\":\"Hi \",\r\n   \"context\":{  \r\n      \"onboardingOfUser\":{  \r\n         \"type\":\"string\",\r\n         \"value\":\"true\"\r\n      },\r\n      \"userInfo\":{  \r\n         \"type\":\"object\",\r\n         \"value\":{  \r\n            \"username\":\"Barbara\"\r\n         }\r\n      }\r\n   }\r\n}"
+		}
+	]
+}

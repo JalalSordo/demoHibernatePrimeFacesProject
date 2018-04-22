@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Login Page</title>
+    </h:head>
+    <h:body>
+        <style>
+            html{
+                zoom:80%;
+            }
+            .ui-panel{
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                width: 25%;
+                margin-top: 10%;
+            }
+        </style>
+        <h:form prependId="false">
+            <p:panel header="Authentication" >
+                <h:panelGrid columns="2" >
+
+                    <p:outputLabel value="Identifiant :"/>
+                    <p:inputText value="#{loginBean.userName}"/>
+
+                    <p:outputLabel value="Mot de passe :"/>
+                    <p:password value="#{loginBean.password}"/>
+
+                    <p:outputLabel value="Souvenez-vous de moi :"/>
+                    <p:selectBooleanCheckbox />
+
+                    <p:commandButton value="Connexion" action="#{loginBean.doLogin}" style=" margin-top: 20px; margin-bottom: 20px;" update="@form"/>
+                    <p:commandLink value="Mot de passe oublié ?"/>
+
+
+                </h:panelGrid>
+
+                <p:messages id="login_messages">
+                    <p:autoUpdate/>
+                </p:messages>
+            </p:panel>
+
+
+        </h:form>
+    </h:body>
+</html>
+

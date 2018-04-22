@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Home</title>
+    </h:head>
+    <h:body>
+
+        <ui:include src="/header.xhtml"/>
+        <h:form prependId="false">
+
+            <p:panel header="Détails du client"   style="display: block;
+                     margin-left: auto;
+                     margin-right: auto;
+                     width: 40%; line-height: 30px;" >
+                <h:panelGrid columns="2" id="content" style="text-align:left;">
+
+                    <p:outputLabel value="Prénom"/>
+                    <p:inputText value="#{customerBean.selectedCustomer.firstName}"/>
+
+                    <p:outputLabel value="Nom de famille"/>
+                    <p:inputText value="#{customerBean.selectedCustomer.lastName}"/>
+
+                    <p:outputLabel value="Courriel"/>
+                    <p:inputText value="#{customerBean.selectedCustomer.email}"/>
+
+                    <p:outputLabel value="Active : "/>
+                    <p:selectBooleanCheckbox  value="#{customerBean.selectedCustomer.active}"/>
+
+                    <h:panelGrid columns="3" >
+                        <p:commandButton value="Enregistrer" actionListener="#{customerBean.saveCustomer}"/>
+                        <p:commandButton rendered="#{!customerBean.newUserMode}" value="Précédent" actionListener="#{customerBean.getCustomer(-1)}" update="content" />
+                        <p:commandButton rendered="#{!customerBean.newUserMode}" value="Suivant" actionListener="#{customerBean.getCustomer(1)}" update="content" />
+                    </h:panelGrid>
+                    <p:messages >
+                        <p:autoUpdate/>
+                    </p:messages>
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
+    </h:body>
+
+
+</html>

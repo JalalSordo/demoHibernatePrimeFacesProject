@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Home</title>66
+       <style>
+            .filterWidth{                
+                width: 100px;   
+            }
+            .searchToolbar
+            {
+                background-color: azure;
+                color:black;
+                margin-top: 10px;
+                margin-bottom: 20px;
+                
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <ui:include src="/header.xhtml"/>
+
+        <h3>
+            <p:outputLabel value="Nombre de clients : #{customerBean.listOfCustomers.size()}"/>
+        </h3>
+        <h:form id="mainForm">
+            <p:toolbar styleClass="searchToolbar">
+                <f:facet name="left">
+                    <p:outputLabel value="Filtrer par :" style="font-size: 25px;"/>
+                    <span class="ui-separator">
+                        <span class="ui-icon ui-icon-grip-dotted-vertical" />
+                    </span>
+                    <p:outputLabel value="Prénom"/>
+                    <p:inputText value="#{customerBean.firstNameFilter}" onkeyup="doSearch();" styleClass="filterWidth"/>
+                    <span class="ui-separator">
+                        <span class="ui-icon ui-icon-grip-dotted-vertical" />
+                    </span>
+                    <p:outputLabel value="Nom de famille"/>
+                    <p:inputText value="#{customerBean.lastNameFilter}" onkeyup="doSearch();" styleClass="filterWidth"/>
+                    <span class="ui-separator">
+                        <span class="ui-icon ui-icon-grip-dotted-vertical" />
+                    </span>
+                    <p:outputLabel value="Pays : "/>
+                    <p:inputText value="#{customerBean.countryFilter}" onkeyup="doSearch();" styleClass="filterWidth"/>
+                    <span class="ui-separator">
+                        <span class="ui-icon ui-icon-grip-dotted-vertical" />
+                    </span>
+                    <p:outputLabel value="Ville : "/>
+                    <p:inputText value="#{customerBean.cityFilter}" onkeyup="doSearch();" styleClass="filterWidth"/>
+                </f:facet>
+                <f:facet name="right">
+                    <p:commandButton process="@this"
+                                     actionListener="#{customerBean.showNewCustomerDialog}"
+                                     value="Ajouter un client"/>
+                </f:facet>
+
+
+            </p:toolbar>
+
+            <p:remoteCommand name="doSearch" actionListener="#{customerBean.doSearch}" update="customerTable" onstart="console.log('doSearch !');"/>
+
+            <p:dataTable id="customerTable" value="#{customerBean.listOfCustomers}" var="customer" rowIndexVar="index">
+
+                <p:column headerText="id" width="100" style="text-align: center;">
+                    <h:outputText value="#{customer.customerId}"/>
+                </p:column>
+                <p:column width="180" headerText="Prénom">
+                    <h:outputText value="#{customer.firstName}" />
+                </p:column>
+                <p:column width="180" headerText="Nom de famille">
+                    <h:outputText value="#{customer.lastName}" />
+                </p:column>
+                <p:column width="400" headerText="Courriel">
+                    <h:outputText value="#{customer.email}"/>
+                </p:column>
+
+                <p:column headerText="Active" width="60" style="text-align: center;">
+                    <h:outputText value="#{customer.active?'Yes':'No'}"/>
+                </p:column>
+                <p:column headerText="Addresse">
+                    <h:outputText value="#{customer.address.city.city},#{customer.address.city.country.country}"/>
+                </p:column>
+                <p:column style="width:40px;text-align: center">
+                    <p:commandButton process="@this"
+                                     actionListener="#{customerBean.showExistingCustomerDialog(customer,index)}"
+                                     icon="ui-icon-search" title="View"/>
+
+                </p:column>
+                <p:column style="width:40px;text-align: center">
+                    <p:commandButton process="@this" update=":mainForm:customerTable" actionListener="#{customerBean.deleteCustomer(customer)}"  icon="ui-icon-close"  title="Delete">
+                        <p:confirm header="Confirmation" message="Are you sure you want to delete this customer?" icon="ui-icon-alert" />
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+            </p:confirmDialog>
+        </h:form>
+    </h:body>
+</html>
+
