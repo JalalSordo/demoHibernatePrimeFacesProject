@@ -35,7 +35,6 @@ public class CustomerDAO implements Serializable {
     public List<Customer> findListOfCustomers() {
         Session session = sessionFactory.openSession();
         List<Customer> listOfCustomers = session.getNamedQuery("findAllCustomers")
-                .setMaxResults(20)
                 .list();
         session.close();
         return listOfCustomers;
@@ -126,7 +125,6 @@ public class CustomerDAO implements Serializable {
 
         criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
         List<Customer> listOfCustomers = criteria
-                .setMaxResults(20)
                 .list();
         session.close();
         return listOfCustomers;

@@ -7,7 +7,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Home</title>66
-       <style>
+        <style>
             .filterWidth{                
                 width: 100px;   
             }
@@ -17,7 +17,7 @@
                 color:black;
                 margin-top: 10px;
                 margin-bottom: 20px;
-                
+
             }
         </style>
     </h:head>
@@ -63,8 +63,31 @@
 
             <p:remoteCommand name="doSearch" actionListener="#{customerBean.doSearch}" update="customerTable" onstart="console.log('doSearch !');"/>
 
-            <p:dataTable id="customerTable" value="#{customerBean.listOfCustomers}" var="customer" rowIndexVar="index">
+            <p:dataTable id="customerTable" value="#{customerBean.listOfCustomers}" var="customer" rowIndexVar="index"
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+                         paginator="true" rows="20" style="margin-bottom:20px">
 
+                <f:facet name="{Exporters}">
+                    <h:commandLink>
+                        <img src="https://www.primefaces.org/showcase/javax.faces.resource/demo/images/excel.png.xhtml"/>
+                        <p:dataExporter type="xls" target="customerTable" fileName="customers" />
+                    </h:commandLink>
+
+                    <h:commandLink>
+                        <img src="https://www.primefaces.org/showcase/javax.faces.resource/demo/images/pdf.png.xhtml"/>
+                        <p:dataExporter type="pdf" target="customerTable" fileName="customers"/>
+                    </h:commandLink>
+
+                    <h:commandLink>
+                        <img src="https://www.primefaces.org/showcase/javax.faces.resource/demo/images/csv.png.xhtml"/>
+                        <p:dataExporter type="csv" target="customerTable" fileName="customers" />
+                    </h:commandLink>
+
+                    <h:commandLink>
+                        <img src="https://www.primefaces.org/showcase/javax.faces.resource/demo/images/xml.png.xhtml"/>
+                        <p:dataExporter type="xml" target="customerTable" fileName="customers" />
+                    </h:commandLink>
+                </f:facet>
                 <p:column headerText="id" width="100" style="text-align: center;">
                     <h:outputText value="#{customer.customerId}"/>
                 </p:column>
@@ -84,13 +107,13 @@
                 <p:column headerText="Addresse">
                     <h:outputText value="#{customer.address.city.city},#{customer.address.city.country.country}"/>
                 </p:column>
-                <p:column style="width:40px;text-align: center">
+                <p:column exportable="false" style="width:40px;text-align: center">
                     <p:commandButton process="@this"
                                      actionListener="#{customerBean.showExistingCustomerDialog(customer,index)}"
                                      icon="ui-icon-search" title="View"/>
 
                 </p:column>
-                <p:column style="width:40px;text-align: center">
+                <p:column exportable="false" style="width:40px;text-align: center">
                     <p:commandButton process="@this" update=":mainForm:customerTable" actionListener="#{customerBean.deleteCustomer(customer)}"  icon="ui-icon-close"  title="Delete">
                         <p:confirm header="Confirmation" message="Are you sure you want to delete this customer?" icon="ui-icon-alert" />
                     </p:commandButton>
