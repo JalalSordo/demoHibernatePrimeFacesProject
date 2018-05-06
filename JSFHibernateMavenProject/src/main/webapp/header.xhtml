@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"  xmlns:ui="http://java.sun.com/jsf/facelets"   xml:lang="en" lang="en"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition>
+        <style>
+            html{
+                zoom:80%;
+            }
+            .ui-panel{
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                width: 40%;
+                margin-top: 10%;
+            }
+        </style>
+        <h:form>
+
+            <p:toolbar>
+                <f:facet name="left">
+                    <p:outputLabel value="Utilisateur connecté : "/>
+                    <span class="ui-separator">
+                        <span class="ui-icon ui-icon-grip-dotted-vertical" />
+                    </span>
+                    <p:commandLink action="userProfile?faces-redirect=true" value="#{customerBean.connectedUser.firstname} #{customerBean.connectedUser.lastname}"/>
+                    <span class="ui-separator">
+                        <span class="ui-icon ui-icon-grip-dotted-vertical" />
+                    </span>
+                    <p:commandLink action="index" value="Liste des clients"/>
+                </f:facet>
+
+                <f:facet name="right">
+                    <p:commandLink action="#{customerBean.disconnect}" value="[ Déconnexion ]" style="color:red;"/>
+                </f:facet>
+
+            </p:toolbar>
+
+
+        </h:form>
+    </ui:composition>
+</html>

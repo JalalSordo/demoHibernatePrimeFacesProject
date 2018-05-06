@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>User Profile</title>
+    </h:head>
+    <h:body>
+        <ui:include src="/header.xhtml"/>
+
+        <p:panel header="Détails du profil de l'utilisateur" style="width:80%;padding-bottom: 25%; " >
+            <h:panelGrid columns="2" style="float:left; line-height: 50px;">
+                <h:form id="user-data">
+                    <h:panelGrid columns="2" style="text-align: left;">
+
+                        <p:outputLabel value="Nom d'utilisateur"/>
+                        <p:inputText value="#{userProfileBean.connectedUser.userName}"/>
+
+                        <p:outputLabel value="Mot de passe"/>
+                        <p:inputText value="#{userProfileBean.connectedUser.password}"/>
+
+                        <p:outputLabel value="Prénom"/>
+                        <p:inputText value="#{userProfileBean.connectedUser.firstname}"/>
+
+                        <p:outputLabel value="Nom de famille"/>
+                        <p:inputText value="#{userProfileBean.connectedUser.lastname}"/>
+
+                        <p:outputLabel value="Courriel"/>
+                        <p:inputText value="#{userProfileBean.connectedUser.email}"/>
+
+                        <p:outputLabel value="Date de naissance"/>
+                        <p:calendar  value="#{userProfileBean.date1}"   pattern="dd/MM/yyyy"/>
+                        
+
+                        <p:outputLabel value="La langue : "/>
+                        <p:selectOneMenu value="#{userProfileBean.connectedUser.language}">
+                            <f:selectItem itemLabel="English" itemValue="en"/>
+                            <f:selectItem itemLabel="French" itemValue="fr"/>
+                        </p:selectOneMenu>
+
+
+                        <p:commandButton value="Enregistrer" 
+                                         actionListener="#{userProfileBean.saveUser}"
+                                         update="@form,userProfileImage,userAttachement"
+                                         style="margin-top: 15px;"/>
+
+                        <p:growl >
+                            <p:autoUpdate/>
+                        </p:growl>
+
+                    </h:panelGrid>
+                </h:form>
+            </h:panelGrid>
+            <h:panelGrid id="userProfileImage" style="float:right;">
+                <h:form prependId="false" enctype="multipart/form-data">
+                    <p:outputLabel value="Image de profil" style="font-weight: bold;"/>
+                    <h:graphicImage value="/image/#{userProfileBean.connectedUser.pictureRef}" style="
+                                    display: block;
+                                    max-width: 320px;
+                                    max-height: 200px;
+                                    width: auto;
+                                    height: auto;"/>
+                    <p:fileUpload fileUploadListener="#{userProfileBean.uploadProfileImage}" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" auto="true" />
+<br />
+                    <h:panelGrid id="userAttachement"  > 
+                        <p:outputLabel value="Fichier attaché : "/>
+                        <p:outputLabel value="#{userProfileBean.connectedUser.documentRef}" style="font-weight: bold;"/>
+                        <p:commandButton value="Télécharger" ajax="false" actionListener="#{userProfileBean.downloadUserAttachemnt}" icon="ui-icon-arrowthick-1-s"/>
+                        <p:fileUpload fileUploadListener="#{userProfileBean.uploadUserAttachment}" allowTypes="/(\.|\/)(pdf|docx)$/" auto="true"/>
+                    </h:panelGrid>
+                </h:form>
+            </h:panelGrid>
+        </p:panel>
+    </h:body>
+</html>
+
+<!-- <p:inputText value="# {userProfileBean.connectedUser.dob}"/> -->
